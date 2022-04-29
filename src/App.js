@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import ManageItems from "./Pages/ManageItems/ManageItems";
+import MyItems from "./Pages/MyItems/MyItems";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           path="/manageItems"
           element={<ManageItems></ManageItems>}
         ></Route>
+        <Route path="/myItems" element={<MyItems></MyItems>}></Route>
       </Routes>
       <Footer></Footer>
     </div>
