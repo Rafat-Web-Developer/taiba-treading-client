@@ -1,8 +1,14 @@
 import React from "react";
 import { Button, Container, Nav, Navbar } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
+
+  const handleLoginButton = () => {
+    navigate("/login");
+  };
+
   return (
     <header>
       <Navbar bg="primary" variant="dark" expand="lg">
@@ -20,8 +26,16 @@ const Header = () => {
               <Nav.Link as={Link} to="/myItems">
                 My Items
               </Nav.Link>
-              <Button variant="info">Login</Button>
-              <Button variant="danger">Logout</Button>
+              <Button
+                onClick={handleLoginButton}
+                variant="info"
+                className="fw-bold"
+              >
+                Login
+              </Button>
+              <Button variant="danger" className="fw-bold">
+                Logout
+              </Button>
             </Nav>
           </Navbar.Collapse>
         </Container>

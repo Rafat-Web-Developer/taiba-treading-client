@@ -6,6 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import ManageItems from "./Pages/ManageItems/ManageItems";
 import MyItems from "./Pages/MyItems/MyItems";
+import Login from "./Pages/Login/Login";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           element={<ManageItems></ManageItems>}
         ></Route>
         <Route path="/myItems" element={<MyItems></MyItems>}></Route>
+        <Route path="/login" element={<Login></Login>}></Route>
       </Routes>
       <Footer></Footer>
     </div>
