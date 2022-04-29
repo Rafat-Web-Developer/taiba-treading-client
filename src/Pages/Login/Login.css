@@ -1,0 +1,8 @@
+.rafat-form-resize{
+    width: 50%;
+}
+@media screen and (max-width: 800px) {
+    .rafat-form-resize{
+        width: 100%;
+    }
+}

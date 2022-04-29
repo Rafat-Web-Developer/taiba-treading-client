@@ -1,11 +1,12 @@
 import React from "react";
 import { Button, Card, Container, Form } from "react-bootstrap";
+import "./Login.css";
 
 const Login = () => {
   return (
     <section className="my-5">
       <Container>
-        <Card>
+        <Card className="rafat-form-resize mx-auto">
           <Card.Header className="bg-primary text-white fw-bold">
             Login Form
           </Card.Header>
