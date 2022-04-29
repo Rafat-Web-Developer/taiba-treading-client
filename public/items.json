@@ -1,0 +1,58 @@
+[
+    {
+        "id": 1,
+        "name": "Zeros Chips",
+        "price": 250,
+        "stock": 1,
+        "img": "https://i.ibb.co/smhHfNc/zeros-chips.png"
+    },
+    {
+        "id": 2,
+        "name": "Water",
+        "price": 250,
+        "stock": 1,
+        "img": "https://i.ibb.co/S5N2y57/water.png"
+    },
+    {
+        "id": 3,
+        "name": "Sixers Chocolate Bar",
+        "price": 250,
+        "stock": 1,
+        "img": "https://i.ibb.co/ydkbbK5/sixers-chocolate-bar.png"
+    },
+    {
+        "id": 4,
+        "name": "Shero Biscuite",
+        "price": 250,
+        "stock": 1,
+        "img": "https://i.ibb.co/F7rWgdV/shero-biscuite.png"
+    },
+    {
+        "id": 5,
+        "name": "Lexus Pouch Pack Biscuite",
+        "price": 250,
+        "stock": 1,
+        "img": "https://i.ibb.co/27QMtbP/lexus-pouch-pack-biscuite.png"
+    },
+    {
+        "id": 6,
+        "name": "Potato Crackers",
+        "price": 250,
+        "stock": 1,
+        "img": "https://i.ibb.co/bmxRH7X/potato-crackers.png"
+    },
+    {
+        "id": 7,
+        "name": "Fruit Fun Biscuite",
+        "price": 250,
+        "stock": 1,
+        "img": "https://i.ibb.co/fNdRqjF/fruit-fun-biscuite.png"
+    },
+    {
+        "id": 8,
+        "name": "Frooto",
+        "price": 250,
+        "stock": 1,
+        "img": "https://i.ibb.co/Fh36MPV/frooto.png"
+    }
+]
