@@ -1,4 +1,5 @@
 import React from "react";
+import { Row } from "react-bootstrap";
 import Item from "../Item/Item";
 
 const Items = () => {
@@ -6,7 +7,9 @@ const Items = () => {
     <section className="my-5">
       <h1 className="text-primary text-center display-6 fw-bold">All Items</h1>
       <div>
-        <Item></Item>
+        <Row xs={1} md={3} className="g-4">
+          <Item></Item>
+        </Row>
       </div>
     </section>
   );
