@@ -1,13 +1,15 @@
 import React from "react";
 import { Card, Col } from "react-bootstrap";
 
-const Item = () => {
+const Item = ({ item }) => {
+  const { name, price, img } = item;
   return (
     <Col>
-      <Card>
-        <Card.Img variant="top" src="holder.js/100px160" />
-        <Card.Body>
-          <Card.Title>Card title</Card.Title>
+      <Card className="shadow-lg">
+        <Card.Img variant="top" src={img} />
+        <Card.Body className="text-center">
+          <Card.Title>{name}</Card.Title>
+          <Card.Title>{price}</Card.Title>
           <Card.Text>
             This is a longer card with supporting text below as a natural
             lead-in to additional content. This content is a little bit longer.
