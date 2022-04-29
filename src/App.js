@@ -7,6 +7,7 @@ import Home from "./Pages/Home/Home";
 import ManageItems from "./Pages/ManageItems/ManageItems";
 import MyItems from "./Pages/MyItems/MyItems";
 import Login from "./Pages/Login/Login";
+import SignUp from "./Pages/SignUp/SignUp";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         ></Route>
         <Route path="/myItems" element={<MyItems></MyItems>}></Route>
         <Route path="/login" element={<Login></Login>}></Route>
+        <Route path="/signUp" element={<SignUp></SignUp>}></Route>
       </Routes>
       <Footer></Footer>
     </div>

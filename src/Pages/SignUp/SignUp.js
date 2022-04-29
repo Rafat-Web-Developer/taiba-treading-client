@@ -1,18 +1,20 @@
 import React from "react";
-import { Button, Card, Container, Form } from "react-bootstrap";
+import { Card, Container, Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import "./Login.css";
-
-const Login = () => {
+const SignUp = () => {
   return (
     <section className="my-5">
       <Container>
         <Card className="rafat-form-resize mx-auto">
           <Card.Header className="bg-primary text-white fw-bold">
-            Login Form
+            Create your new account
           </Card.Header>
           <Card.Body className="py-4">
             <Form>
+              <Form.Group className="mb-3" controlId="formBasicName">
+                <Form.Control type="text" placeholder="Enter your name" />
+              </Form.Group>
+
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Control type="email" placeholder="Enter your email" />
               </Form.Group>
@@ -23,20 +25,27 @@ const Login = () => {
                   placeholder="Enter your password"
                 />
               </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
+                <Form.Control
+                  type="password"
+                  placeholder="Enter your password again"
+                />
+              </Form.Group>
               <Button
                 variant="primary"
                 type="submit"
                 className="fw-bold w-100 mt-3"
               >
-                Login
+                Sign up
               </Button>
               <p className="my-2">
-                Create a new account{" "}
+                Already have an account{" "}
                 <Link
-                  to="/signUp"
+                  to="/login"
                   className="text-decoration-none fw-bold text-primary"
                 >
-                  SignUp
+                  Login
                 </Link>{" "}
               </p>
               <div className="mb-3 mt-4 d-flex align-items-center justify-content-center">
@@ -55,4 +64,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
