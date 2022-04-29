@@ -29,7 +29,7 @@ const Header = () => {
               <Button
                 onClick={handleLoginButton}
                 variant="info"
-                className="fw-bold"
+                className="fw-bold text-white"
               >
                 Login
               </Button>
