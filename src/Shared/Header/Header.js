@@ -1,11 +1,20 @@
 import React from "react";
 import { Button, Container, Nav, Navbar } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
+import { signOut } from "firebase/auth";
 
 const Header = () => {
+  const [user] = useAuthState(auth);
   const navigate = useNavigate();
 
   const handleLoginButton = () => {
+    navigate("/login");
+  };
+
+  const handleSignOut = () => {
+    signOut();
     navigate("/login");
   };
 
@@ -29,16 +38,23 @@ const Header = () => {
               <Nav.Link as={Link} to="/myItems">
                 My Items
               </Nav.Link>
-              <Button
-                onClick={handleLoginButton}
-                variant="info"
-                className="fw-bold text-white"
-              >
-                Login
-              </Button>
-              <Button variant="danger" className="fw-bold">
-                Logout
-              </Button>
+              {user ? (
+                <Button
+                  variant="danger"
+                  className="fw-bold"
+                  onClick={handleSignOut}
+                >
+                  Logout
+                </Button>
+              ) : (
+                <Button
+                  onClick={handleLoginButton}
+                  variant="info"
+                  className="fw-bold text-white"
+                >
+                  Login
+                </Button>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>
