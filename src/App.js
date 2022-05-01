@@ -10,6 +10,7 @@ import Login from "./Pages/Login/Login";
 import SignUp from "./Pages/SignUp/SignUp";
 import AddItem from "./Pages/AddItem/AddItem";
 import RequireAuth from "./Pages/RequireAuth/RequireAuth";
+import EmailVerification from "./Pages/EmailVerification/EmailVerification";
 
 function App() {
   return (
@@ -40,6 +41,10 @@ function App() {
               <MyItems></MyItems>
             </RequireAuth>
           }
+        ></Route>
+        <Route
+          path="/emailVerification"
+          element={<EmailVerification></EmailVerification>}
         ></Route>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/signUp" element={<SignUp></SignUp>}></Route>
