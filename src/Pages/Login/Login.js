@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Card, Container, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./Login.css";
 import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
@@ -18,13 +18,15 @@ const Login = () => {
   ] = useSignInWithEmailAndPassword(auth);
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
 
   if (loading || loadingEmailAndPassword) {
     return <Loading></Loading>;
   }
 
   if (user || userUsingEmailAndPasswordLogin) {
-    navigate("/manageItems");
+    navigate(from, { replace: true });
   }
 
   const handleGoogleLogin = () => {
