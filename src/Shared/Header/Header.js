@@ -14,7 +14,7 @@ const Header = () => {
   };
 
   const handleSignOut = () => {
-    signOut();
+    signOut(auth);
     navigate("/login");
   };
 
