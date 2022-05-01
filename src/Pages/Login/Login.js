@@ -1,10 +1,29 @@
 import React from "react";
 import { Button, Card, Container, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import SocialLogin from "../../Shared/SocialLogin/SocialLogin";
 import "./Login.css";
+import { useSignInWithGoogle } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
+import auth from "../../firebase.init";
+import Loading from "../../Shared/Loading/Loading";
 
 const Login = () => {
+  const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+
+  const navigate = useNavigate();
+
+  if (loading) {
+    return <Loading></Loading>;
+  }
+
+  if (user) {
+    navigate("/manageItems");
+  }
+
+  const handleGoogleLogin = () => {
+    signInWithGoogle();
+  };
+
   return (
     <section className="my-5">
       <Container>
@@ -41,7 +60,22 @@ const Login = () => {
                 </Link>{" "}
               </p>
             </Form>
-            <SocialLogin></SocialLogin>
+            <div>
+              {error && <p className="text-danger">{error?.message}</p>}
+              <div className="mb-3 mt-4 d-flex align-items-center justify-content-center">
+                <p className="w-25 bg-primary" style={{ height: "2px" }}></p>
+                <p className="text-primary fw-bold mx-2">Or</p>
+                <p className="w-25 bg-primary" style={{ height: "2px" }}></p>
+              </div>
+              <Button
+                variant="success"
+                onClick={handleGoogleLogin}
+                type="button"
+                className="w-100 fw-bold"
+              >
+                Sign in with Google
+              </Button>
+            </div>
           </Card.Body>
         </Card>
       </Container>

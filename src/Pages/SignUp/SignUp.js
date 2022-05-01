@@ -4,13 +4,21 @@ import { Link, useNavigate } from "react-router-dom";
 import SocialLogin from "../../Shared/SocialLogin/SocialLogin";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
+import Loading from "../../Shared/Loading/Loading";
 
 const SignUp = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
-
   const navigate = useNavigate();
+
+  if (loading) {
+    return <Loading></Loading>;
+  }
+
+  if (user) {
+    navigate("/manageItems");
+  }
 
   const handleSignUpData = (event) => {
     event.preventDefault();
@@ -31,7 +39,6 @@ const SignUp = () => {
 
     setErrorMessage("");
     createUserWithEmailAndPassword(email, password);
-    navigate("/manageItems");
   };
   return (
     <section className="my-5">
@@ -98,7 +105,6 @@ const SignUp = () => {
                 </Link>{" "}
               </p>
             </Form>
-            <SocialLogin></SocialLogin>
           </Card.Body>
         </Card>
       </Container>

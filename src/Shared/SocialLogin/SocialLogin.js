@@ -3,11 +3,16 @@ import { Button } from "react-bootstrap";
 import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
+import Loading from "../Loading/Loading";
 
 const SocialLogin = () => {
   const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
 
   const navigate = useNavigate();
+
+  if (loading) {
+    return <Loading></Loading>;
+  }
 
   if (user) {
     navigate("/manageItems");
@@ -31,7 +36,7 @@ const SocialLogin = () => {
         type="button"
         className="w-100 fw-bold"
       >
-        Google
+        Sign in with Google
       </Button>
     </div>
   );
