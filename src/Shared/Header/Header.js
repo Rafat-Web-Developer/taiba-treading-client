@@ -43,6 +43,11 @@ const Header = () => {
               <Nav.Link as={Link} to="/myItems">
                 My Items
               </Nav.Link>
+              {user && (
+                <Nav.Link as={Link} to="/myItems">
+                  {user?.displayName}
+                </Nav.Link>
+              )}
               {user ? (
                 <Button
                   variant="danger"

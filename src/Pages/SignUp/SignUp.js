@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { Card, Container, Form, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import SocialLogin from "../../Shared/SocialLogin/SocialLogin";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import Loading from "../../Shared/Loading/Loading";
+import { useUpdateProfile } from "react-firebase-hooks/auth";
 
 const SignUp = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
+  const [updateProfile] = useUpdateProfile(auth);
+
   const navigate = useNavigate();
 
   if (loading) {
@@ -20,7 +22,7 @@ const SignUp = () => {
     navigate("/manageItems");
   }
 
-  const handleSignUpData = (event) => {
+  const handleSignUpData = async (event) => {
     event.preventDefault();
 
     const name = event.target.name.value;
@@ -38,7 +40,8 @@ const SignUp = () => {
     }
 
     setErrorMessage("");
-    createUserWithEmailAndPassword(email, password);
+    await createUserWithEmailAndPassword(email, password);
+    await updateProfile({ displayName: name });
   };
   return (
     <section className="my-5">
