@@ -6,22 +6,37 @@ import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import Loading from "../../Shared/Loading/Loading";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 
 const Login = () => {
   const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+  const [
+    signInWithEmailAndPassword,
+    userUsingEmailAndPasswordLogin,
+    loadingEmailAndPassword,
+    errorEmailAndPassword,
+  ] = useSignInWithEmailAndPassword(auth);
 
   const navigate = useNavigate();
 
-  if (loading) {
+  if (loading || loadingEmailAndPassword) {
     return <Loading></Loading>;
   }
 
-  if (user) {
+  if (user || userUsingEmailAndPasswordLogin) {
     navigate("/manageItems");
   }
 
   const handleGoogleLogin = () => {
     signInWithGoogle();
+  };
+
+  const handleLogin = (event) => {
+    event.preventDefault();
+
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    signInWithEmailAndPassword(email, password);
   };
 
   return (
@@ -32,17 +47,28 @@ const Login = () => {
             Login Form
           </Card.Header>
           <Card.Body className="py-4">
-            <Form>
+            <Form onSubmit={handleLogin}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Control type="email" placeholder="Enter your email" />
+                <Form.Control
+                  type="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  required
+                />
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Control
                   type="password"
+                  name="password"
                   placeholder="Enter your password"
+                  required
                 />
               </Form.Group>
+              {error && <p className="text-danger">{error?.message}</p>}
+              {errorEmailAndPassword && (
+                <p className="text-danger">{errorEmailAndPassword?.message}</p>
+              )}
               <Button
                 variant="primary"
                 type="submit"
@@ -61,7 +87,6 @@ const Login = () => {
               </p>
             </Form>
             <div>
-              {error && <p className="text-danger">{error?.message}</p>}
               <div className="mb-3 mt-4 d-flex align-items-center justify-content-center">
                 <p className="w-25 bg-primary" style={{ height: "2px" }}></p>
                 <p className="text-primary fw-bold mx-2">Or</p>
