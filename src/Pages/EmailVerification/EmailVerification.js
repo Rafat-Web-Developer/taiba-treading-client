@@ -1,7 +1,32 @@
 import React from "react";
 import { Button } from "react-bootstrap";
+import {
+  useAuthState,
+  useSendEmailVerification,
+} from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
+import auth from "../../firebase.init";
+import Loading from "../../Shared/Loading/Loading";
 
 const EmailVerification = () => {
+  const [user, loading] = useAuthState(auth);
+  const [sendEmailVerification, sending, error] =
+    useSendEmailVerification(auth);
+  const navigate = useNavigate();
+
+  if (loading || sending) {
+    return <Loading></Loading>;
+  }
+
+  if (user.emailVerified) {
+    navigate("/");
+  }
+
+  const handleEmailVerificationSend = () => {
+    const email = user.email;
+    sendEmailVerification(email);
+  };
+
   return (
     <section
       className="d-flex align-items-center justify-content-center"
@@ -9,7 +34,10 @@ const EmailVerification = () => {
     >
       <div className="text-center">
         <h3 className="text-danger mb-3 display-6">Please verify your email</h3>
-        <Button variant="primary">Send Verification Email</Button>
+        {error && <p className="text-danger mb-3">{error.message}</p>}
+        <Button variant="primary" onClick={handleEmailVerificationSend}>
+          Send Verification Email
+        </Button>
       </div>
     </section>
   );
