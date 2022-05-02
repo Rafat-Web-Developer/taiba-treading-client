@@ -17,8 +17,7 @@ const EmailVerification = () => {
   if (loading || sending) {
     return <Loading></Loading>;
   }
-
-  if (user.emailVerified) {
+  if (user?.emailVerified || !user) {
     navigate("/");
   }
 
