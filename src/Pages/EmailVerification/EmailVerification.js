@@ -5,6 +5,7 @@ import {
   useSendEmailVerification,
 } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 import Loading from "../../Shared/Loading/Loading";
 
@@ -24,6 +25,7 @@ const EmailVerification = () => {
   const handleEmailVerificationSend = () => {
     const email = user.email;
     sendEmailVerification(email);
+    toast("Send email successfully");
   };
 
   return (
