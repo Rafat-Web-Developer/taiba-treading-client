@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Card, Container, Form } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import "./Login.css";
@@ -9,6 +9,7 @@ import Loading from "../../Shared/Loading/Loading";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 
 const Login = () => {
+  const [showReset, setShowReset] = useState(false);
   const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
   const [
     signInWithEmailAndPassword,
@@ -41,12 +42,16 @@ const Login = () => {
     signInWithEmailAndPassword(email, password);
   };
 
+  const handleShowResetPassword = () => {
+    setShowReset(true);
+  };
+
   return (
     <section className="my-5">
       <Container>
         <Card className="rafat-form-resize mx-auto">
           <Card.Header className="bg-primary text-white fw-bold">
-            Login Form
+            {showReset ? "Reset Password" : "Login Form"}
           </Card.Header>
           <Card.Body className="py-4">
             <Form onSubmit={handleLogin}>
@@ -59,50 +64,78 @@ const Login = () => {
                 />
               </Form.Group>
 
-              <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Control
-                  type="password"
-                  name="password"
-                  placeholder="Enter your password"
-                  required
-                />
-              </Form.Group>
+              {!showReset && (
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                  <Form.Control
+                    type="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    required
+                  />
+                </Form.Group>
+              )}
               {error && <p className="text-danger">{error?.message}</p>}
               {errorEmailAndPassword && (
                 <p className="text-danger">{errorEmailAndPassword?.message}</p>
               )}
-              <Button
-                variant="primary"
-                type="submit"
-                className="fw-bold w-100 mt-3"
-              >
-                Login
-              </Button>
-              <p className="my-2">
-                Create a new account{" "}
-                <Link
-                  to="/signUp"
-                  className="text-decoration-none fw-bold text-primary"
+              {showReset ? (
+                <Button
+                  variant="primary"
+                  type="submit"
+                  className="fw-bold w-100 mt-3"
                 >
-                  SignUp
-                </Link>{" "}
-              </p>
+                  Send Email
+                </Button>
+              ) : (
+                <Button
+                  variant="primary"
+                  type="submit"
+                  className="fw-bold w-100 mt-3"
+                >
+                  Login
+                </Button>
+              )}
+              {!showReset && (
+                <>
+                  <p className="my-2">
+                    Create a new account{" "}
+                    <Link
+                      to="/signUp"
+                      className="text-decoration-none fw-bold text-primary"
+                    >
+                      SignUp
+                    </Link>{" "}
+                  </p>
+                  <p className="my-2">
+                    Forgot Password{" "}
+                    <a
+                      className="text-decoration-none text-primary fw-bold"
+                      onClick={handleShowResetPassword}
+                      style={{ cursor: "pointer" }}
+                    >
+                      Reset Password
+                    </a>
+                  </p>
+                </>
+              )}
             </Form>
-            <div>
-              <div className="mb-3 mt-4 d-flex align-items-center justify-content-center">
-                <p className="w-25 bg-primary" style={{ height: "2px" }}></p>
-                <p className="text-primary fw-bold mx-2">Or</p>
-                <p className="w-25 bg-primary" style={{ height: "2px" }}></p>
+            {!showReset && (
+              <div>
+                <div className="mb-3 mt-4 d-flex align-items-center justify-content-center">
+                  <p className="w-25 bg-primary" style={{ height: "2px" }}></p>
+                  <p className="text-primary fw-bold mx-2">Or</p>
+                  <p className="w-25 bg-primary" style={{ height: "2px" }}></p>
+                </div>
+                <Button
+                  variant="success"
+                  onClick={handleGoogleLogin}
+                  type="button"
+                  className="w-100 fw-bold"
+                >
+                  Sign in with Google
+                </Button>
               </div>
-              <Button
-                variant="success"
-                onClick={handleGoogleLogin}
-                type="button"
-                className="w-100 fw-bold"
-              >
-                Sign in with Google
-              </Button>
-            </div>
+            )}
           </Card.Body>
         </Card>
       </Container>
