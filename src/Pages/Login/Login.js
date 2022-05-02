@@ -6,7 +6,11 @@ import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import Loading from "../../Shared/Loading/Loading";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import {
+  useSignInWithEmailAndPassword,
+  useSendPasswordResetEmail,
+} from "react-firebase-hooks/auth";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [showReset, setShowReset] = useState(false);
@@ -17,12 +21,14 @@ const Login = () => {
     loadingEmailAndPassword,
     errorEmailAndPassword,
   ] = useSignInWithEmailAndPassword(auth);
+  const [sendPasswordResetEmail, sending, errorForResetPassword] =
+    useSendPasswordResetEmail(auth);
 
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state?.from?.pathname || "/";
 
-  if (loading || loadingEmailAndPassword) {
+  if (loading || loadingEmailAndPassword || sending) {
     return <Loading></Loading>;
   }
 
@@ -46,6 +52,16 @@ const Login = () => {
     setShowReset(true);
   };
 
+  const handleSendEmailForResetPassword = (e) => {
+    e.preventDefault();
+
+    const email = e.target.email.value;
+    sendPasswordResetEmail(email);
+    e.target.email.value = "";
+    setShowReset(false);
+    toast("Send Email Successfully");
+  };
+
   return (
     <section className="my-5">
       <Container>
@@ -54,7 +70,11 @@ const Login = () => {
             {showReset ? "Reset Password" : "Login Form"}
           </Card.Header>
           <Card.Body className="py-4">
-            <Form onSubmit={handleLogin}>
+            <Form
+              onSubmit={
+                showReset ? handleSendEmailForResetPassword : handleLogin
+              }
+            >
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Control
                   type="email"
@@ -77,6 +97,9 @@ const Login = () => {
               {error && <p className="text-danger">{error?.message}</p>}
               {errorEmailAndPassword && (
                 <p className="text-danger">{errorEmailAndPassword?.message}</p>
+              )}
+              {errorForResetPassword && (
+                <p className="text-danger">{errorForResetPassword?.message}</p>
               )}
               {showReset ? (
                 <Button
