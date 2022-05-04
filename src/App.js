@@ -13,6 +13,7 @@ import RequireAuth from "./Pages/RequireAuth/RequireAuth";
 import EmailVerification from "./Pages/EmailVerification/EmailVerification";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import UpdateItem from "./Pages/UpdateItem/UpdateItem";
 
 function App() {
   return (
@@ -33,6 +34,14 @@ function App() {
           element={
             <RequireAuth>
               <AddItem></AddItem>
+            </RequireAuth>
+          }
+        ></Route>
+        <Route
+          path="/updateItem/:itemId"
+          element={
+            <RequireAuth>
+              <UpdateItem></UpdateItem>
             </RequireAuth>
           }
         ></Route>

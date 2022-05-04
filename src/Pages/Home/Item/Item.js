@@ -1,8 +1,16 @@
 import React from "react";
-import { Card, Col } from "react-bootstrap";
+import { Button, Card, Col } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const Item = ({ item }) => {
-  const { name, price, img } = item;
+  const { id, name, price, description, img } = item;
+  const navigate = useNavigate();
+
+  const handleUpdateBtn = (id) => {
+    const url = `/updateItem/${id}`;
+    navigate(url);
+  };
+
   return (
     <Col>
       <Card className="shadow-lg">
@@ -10,10 +18,10 @@ const Item = ({ item }) => {
         <Card.Body className="text-center">
           <Card.Title>{name}</Card.Title>
           <Card.Title>{price}</Card.Title>
-          <Card.Text>
-            This is a longer card with supporting text below as a natural
-            lead-in to additional content. This content is a little bit longer.
-          </Card.Text>
+          <Card.Text>{description}</Card.Text>
+          <Button variant="primary" onClick={() => handleUpdateBtn(id)}>
+            Update
+          </Button>
         </Card.Body>
       </Card>
     </Col>
