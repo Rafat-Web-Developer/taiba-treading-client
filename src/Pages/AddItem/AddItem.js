@@ -30,6 +30,14 @@ const AddItem = () => {
                 <Form.Control type="number" placeholder="Enter quantity" />
               </Form.Group>
 
+              <Form.Group className="mb-3" controlId="formBasicStock">
+                <Form.Control type="number" placeholder="Enter stock value" />
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicSupplier">
+                <Form.Control type="text" placeholder="Enter supplier's name" />
+              </Form.Group>
+
               <Form.Group className="mb-3" controlId="formBasicImage">
                 <Form.Control type="text" placeholder="Enter image path" />
               </Form.Group>
