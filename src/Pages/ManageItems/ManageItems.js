@@ -12,50 +12,54 @@ const ManageItems = () => {
             Manage All Items
           </Card.Header>
           <Card.Body>
-            <Table responsive striped bordered hover>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Name</th>
-                  <th>Image</th>
-                  <th>Description</th>
-                  <th>Price</th>
-                  <th>Quantity</th>
-                  <th>Stock</th>
-                  <th>Supplier Name</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {items.map((item, index) => (
-                  <tr key={item._id}>
-                    <td>{index}</td>
-                    <td>{item.name}</td>
-                    <td>
-                      <img
-                        src={item.img}
-                        alt="item_img"
-                        style={{ width: "50px", height: "50px" }}
-                      />
-                    </td>
-                    <td>{item.description}</td>
-                    <td>{item.price}</td>
-                    <td>{item.quantity}</td>
-                    <td>{item.stock}</td>
-                    <td>{item.supplierName}</td>
-                    <td>
-                      <Button
-                        variant="danger"
-                        type="submit"
-                        className="fw-bold"
-                      >
-                        Delete
-                      </Button>
-                    </td>
+            {items.length === 0 ? (
+              <h1 className="text-center text-danger">Empty Items</h1>
+            ) : (
+              <Table responsive striped bordered hover>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Stock</th>
+                    <th>Supplier Name</th>
+                    <th>Action</th>
                   </tr>
-                ))}
-              </tbody>
-            </Table>
+                </thead>
+                <tbody>
+                  {items.map((item, index) => (
+                    <tr key={item._id}>
+                      <td>{index + 1}</td>
+                      <td>{item.name}</td>
+                      <td>
+                        <img
+                          src={item.image}
+                          alt="item_img"
+                          style={{ width: "50px", height: "50px" }}
+                        />
+                      </td>
+                      <td>{item.description}</td>
+                      <td>{item.price}</td>
+                      <td>{item.quantity}</td>
+                      <td>{item.stock}</td>
+                      <td>{item.supplier}</td>
+                      <td>
+                        <Button
+                          variant="danger"
+                          type="submit"
+                          className="fw-bold"
+                        >
+                          Delete
+                        </Button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            )}
           </Card.Body>
         </Card>
       </Container>

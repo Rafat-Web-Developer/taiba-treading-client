@@ -1,7 +1,12 @@
 import React from "react";
 import { Button, Card, Container, Form } from "react-bootstrap";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { toast } from "react-toastify";
+import auth from "../../firebase.init";
 
 const AddItem = () => {
+  const [user] = useAuthState(auth);
+
   const handleAddItemSubmit = (event) => {
     event.preventDefault();
 
@@ -21,6 +26,7 @@ const AddItem = () => {
       stock: itemStock,
       supplier: itemSupplier,
       image: itemImage,
+      email: user.email,
     };
 
     // console.log(data);
@@ -34,7 +40,8 @@ const AddItem = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
+        toast("Item created successfully!");
       });
     event.target.reset();
   };
