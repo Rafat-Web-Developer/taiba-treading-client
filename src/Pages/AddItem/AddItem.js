@@ -2,6 +2,31 @@ import React from "react";
 import { Button, Card, Container, Form } from "react-bootstrap";
 
 const AddItem = () => {
+  const handleAddItemSubmit = (event) => {
+    event.preventDefault();
+
+    const itemName = event.target.name.value;
+    const itemDescription = event.target.description.value;
+    const itemPrice = event.target.price.value;
+    const itemQuantity = event.target.quantity.value;
+    const itemStock = event.target.stock.value;
+    const itemSupplier = event.target.supplier.value;
+    const itemImage = event.target.image.value;
+
+    const data = {
+      name: itemName,
+      description: itemDescription,
+      price: itemPrice,
+      quantity: itemQuantity,
+      stock: itemStock,
+      supplier: itemSupplier,
+      image: itemImage,
+    };
+
+    console.log(data);
+    event.target.reset();
+  };
+
   return (
     <section className="my-5">
       <Container>
@@ -10,36 +35,68 @@ const AddItem = () => {
             Add a new item
           </Card.Header>
           <Card.Body className="py-4">
-            <Form>
+            <Form onSubmit={handleAddItemSubmit}>
               <Form.Group className="mb-3" controlId="formBasicName">
-                <Form.Control type="text" placeholder="Enter Item name here" />
+                <Form.Control
+                  type="text"
+                  name="name"
+                  placeholder="Enter Item name here"
+                  required
+                />
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicDescription">
                 <Form.Control
                   type="text"
+                  name="description"
                   placeholder="Enter description here"
+                  required
                 />
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicPrice">
-                <Form.Control type="number" placeholder="Enter price" />
+                <Form.Control
+                  type="number"
+                  name="price"
+                  placeholder="Enter price"
+                  required
+                />
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicQuantity">
-                <Form.Control type="number" placeholder="Enter quantity" />
+                <Form.Control
+                  type="number"
+                  name="quantity"
+                  placeholder="Enter quantity"
+                  required
+                />
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicStock">
-                <Form.Control type="number" placeholder="Enter stock value" />
+                <Form.Control
+                  type="number"
+                  name="stock"
+                  placeholder="Enter stock value"
+                  required
+                />
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicSupplier">
-                <Form.Control type="text" placeholder="Enter supplier's name" />
+                <Form.Control
+                  type="text"
+                  name="supplier"
+                  placeholder="Enter supplier's name"
+                  required
+                />
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicImage">
-                <Form.Control type="text" placeholder="Enter image path" />
+                <Form.Control
+                  type="text"
+                  name="image"
+                  placeholder="Enter image path"
+                  required
+                />
               </Form.Group>
 
               <Button
