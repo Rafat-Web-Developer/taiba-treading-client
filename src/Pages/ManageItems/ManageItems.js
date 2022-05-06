@@ -1,14 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Button, Card, Container, Table } from "react-bootstrap";
+import useItems from "../../hooks/useItems";
 
 const ManageItems = () => {
-  const [items, setItems] = useState([]);
-
-  useEffect(() => {
-    fetch("items.json")
-      .then((res) => res.json())
-      .then((data) => setItems(data));
-  }, []);
+  const [items, setItems] = useItems();
   return (
     <section className="py-5">
       <Container>
@@ -33,7 +28,7 @@ const ManageItems = () => {
               </thead>
               <tbody>
                 {items.map((item, index) => (
-                  <tr key={item.id}>
+                  <tr key={item._id}>
                     <td>{index}</td>
                     <td>{item.name}</td>
                     <td>

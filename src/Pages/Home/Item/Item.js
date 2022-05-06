@@ -3,7 +3,7 @@ import { Button, Card, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 const Item = ({ item }) => {
-  const { id, name, price, description, img } = item;
+  const { _id, name, price, description, img } = item;
   const navigate = useNavigate();
 
   const handleUpdateBtn = (id) => {
@@ -19,7 +19,7 @@ const Item = ({ item }) => {
           <Card.Title>{name}</Card.Title>
           <Card.Title>{price}</Card.Title>
           <Card.Text>{description}</Card.Text>
-          <Button variant="primary" onClick={() => handleUpdateBtn(id)}>
+          <Button variant="primary" onClick={() => handleUpdateBtn(_id)}>
             Update
           </Button>
         </Card.Body>
