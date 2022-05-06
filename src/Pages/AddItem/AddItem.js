@@ -23,7 +23,19 @@ const AddItem = () => {
       image: itemImage,
     };
 
-    console.log(data);
+    // console.log(data);
+
+    fetch("http://localhost:5000/item", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
     event.target.reset();
   };
 
