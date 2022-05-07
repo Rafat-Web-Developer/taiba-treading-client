@@ -1,9 +1,18 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Button, Card, Container, Table } from "react-bootstrap";
 import useItems from "../../hooks/useItems";
 
 const ManageItems = () => {
   const [items, setItems] = useItems();
+
+  const navigate = useNavigate();
+
+  const handleShowBtn = (id) => {
+    const url = `/updateItem/${id}`;
+    navigate(url);
+  };
+
   return (
     <section className="py-5">
       <Container>
@@ -46,11 +55,17 @@ const ManageItems = () => {
                       <td>{item.quantity}</td>
                       <td>{item.stock}</td>
                       <td>{item.supplier}</td>
-                      <td>
+                      <td className="d-flex">
+                        <Button
+                          variant="primary"
+                          onClick={() => handleShowBtn(item._id)}
+                        >
+                          Show
+                        </Button>
                         <Button
                           variant="danger"
                           type="submit"
-                          className="fw-bold"
+                          className="fw-bold ms-1"
                         >
                           Delete
                         </Button>
