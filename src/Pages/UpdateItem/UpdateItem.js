@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 
 const UpdateItem = () => {
   const { itemId } = useParams();
+  const [item, setItem] = useState({});
+
+  useEffect(() => {
+    const url = `http://localhost:5000/item/${itemId}`;
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => setItem(data));
+  }, []);
+
   return (
     <section className="my-5">
       <Container>
@@ -11,32 +20,33 @@ const UpdateItem = () => {
           <Card.Header>
             <Row>
               <Col xs="10">
-                <Card.Title>{itemId}</Card.Title>
+                <Card.Title>{item.name}</Card.Title>
               </Col>
               <Col xs="2" className="text-end">
-                <span className="badge bg-primary">5</span>
+                <span className="badge bg-primary">{item.stock}</span>
               </Col>
             </Row>
           </Card.Header>
           <Card.Body className="text-center">
             <Row>
               <Col md="4">
-                <img
-                  src="https://i.ibb.co/smhHfNc/zeros-chips.png"
-                  alt="Item_image"
-                  className="img-fluid"
-                />
+                <img src={item.image} alt="Item_image" className="img-fluid" />
               </Col>
               <Col md="8">
-                <Card.Text>
-                  Description : With supporting text below as a natural lead-in
-                  to additional content.
-                </Card.Text>
-                <p className="fw-bold fs-6">Supplier's Name : </p>
+                <Card.Text>Description : {item.description}</Card.Text>
+                <p className="fw-bold fs-6">
+                  Supplier's Name : {item.supplier}
+                </p>
                 <div className="mb-3">
-                  <span className="badge bg-danger m-1">Price : 250</span>
-                  <span className="badge bg-success m-1">Quantity : 10</span>
-                  <span className="badge bg-primary m-1">Stock : 5</span>
+                  <span className="badge bg-danger m-1">
+                    Price : {item.price}
+                  </span>
+                  <span className="badge bg-success m-1">
+                    Quantity : {item.quantity}
+                  </span>
+                  <span className="badge bg-primary m-1">
+                    Stock : {item.stock}
+                  </span>
                 </div>
                 <Button variant="danger">Delivered</Button>
                 <div className="my-3">
