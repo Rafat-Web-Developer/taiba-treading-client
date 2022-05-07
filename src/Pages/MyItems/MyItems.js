@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Button, Card, Container, Table } from "react-bootstrap";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 
 const MyItems = () => {
   const [user] = useAuthState(auth);
   const [items, setItems] = useState([]);
+
+  const navigate = useNavigate();
 
   const email = user.email;
 
@@ -15,6 +19,26 @@ const MyItems = () => {
       .then((res) => res.json())
       .then((data) => setItems(data));
   }, []);
+
+  const handleShowBtn = (id) => {
+    const url = `/updateItem/${id}`;
+    navigate(url);
+  };
+
+  const handleDeleteBtn = (id) => {
+    const url = `http://localhost:5000/item/${id}`;
+    fetch(url, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data) {
+          toast("Item Deleted Successfully, Alhamdulillah");
+        }
+      });
+    const restItem = items.filter((item) => item._id !== id);
+    setItems(restItem);
+  };
 
   return (
     <section className="py-5">
@@ -60,9 +84,16 @@ const MyItems = () => {
                       <td>{item.supplier}</td>
                       <td>
                         <Button
+                          variant="primary"
+                          onClick={() => handleShowBtn(item._id)}
+                        >
+                          Show
+                        </Button>
+                        <Button
                           variant="danger"
                           type="submit"
-                          className="fw-bold"
+                          className="fw-bold ms-1"
+                          onClick={() => handleDeleteBtn(item._id)}
                         >
                           Delete
                         </Button>
