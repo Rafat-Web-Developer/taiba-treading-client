@@ -13,6 +13,10 @@ const UpdateItem = () => {
       .then((data) => setItem(data));
   }, []);
 
+  const handleDelivered = () => {
+    alert("Click");
+  };
+
   return (
     <section className="my-5">
       <Container>
@@ -48,7 +52,9 @@ const UpdateItem = () => {
                     Stock : {item.stock}
                   </span>
                 </div>
-                <Button variant="danger">Delivered</Button>
+                <Button variant="danger" onClick={handleDelivered}>
+                  Delivered
+                </Button>
                 <div className="my-3">
                   <form className="d-flex justify-content-center">
                     <input
