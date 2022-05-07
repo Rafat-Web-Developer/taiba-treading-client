@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Card, Container, Table } from "react-bootstrap";
+import { toast } from "react-toastify";
 import useItems from "../../hooks/useItems";
 
 const ManageItems = () => {
@@ -11,6 +12,21 @@ const ManageItems = () => {
   const handleShowBtn = (id) => {
     const url = `/updateItem/${id}`;
     navigate(url);
+  };
+
+  const handleDeleteBtn = (id) => {
+    const url = `http://localhost:5000/item/${id}`;
+    fetch(url, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data) {
+          toast("Item Deleted Successfully, Alhamdulillah");
+        }
+      });
+    const restItem = items.filter((item) => item._id !== id);
+    setItems(restItem);
   };
 
   return (
@@ -66,6 +82,7 @@ const ManageItems = () => {
                           variant="danger"
                           type="submit"
                           className="fw-bold ms-1"
+                          onClick={() => handleDeleteBtn(item._id)}
                         >
                           Delete
                         </Button>
