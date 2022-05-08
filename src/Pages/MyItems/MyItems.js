@@ -1,3 +1,4 @@
+import { signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { Button, Card, Container, Table } from "react-bootstrap";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -15,9 +16,25 @@ const MyItems = () => {
 
   useEffect(() => {
     const url = `http://localhost:5000/items/${email}`;
-    fetch(url)
+
+    fetch(url, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
       .then((res) => res.json())
-      .then((data) => setItems(data));
+      .then((data) => {
+        if (data.message) {
+          setItems([]);
+
+          if (data.status === 401 || data.status === 403) {
+            signOut(auth);
+            navigate("/login");
+          }
+        } else {
+          setItems(data);
+        }
+      });
   }, []);
 
   const handleShowBtn = (id) => {
@@ -66,7 +83,7 @@ const MyItems = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {items.map((item, index) => (
+                  {items?.map((item, index) => (
                     <tr key={item.id}>
                       <td>{index + 1}</td>
                       <td>{item.name}</td>
