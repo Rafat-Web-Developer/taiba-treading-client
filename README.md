@@ -6,7 +6,7 @@ Stack Overflow Question's Link : [stack-overFlow-question-link](https://stackove
 
 ## How I create this website ?
 
-### Clint Site
+### Client Site
 
 1. First I create a plan how I create this application.
 2. Second I create a react app using react cmd.
