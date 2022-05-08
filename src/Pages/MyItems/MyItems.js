@@ -15,7 +15,7 @@ const MyItems = () => {
   const email = user.email;
 
   useEffect(() => {
-    const url = `http://localhost:5000/items/${email}`;
+    const url = `https://arcane-tundra-05128.herokuapp.com/items/${email}`;
 
     fetch(url, {
       headers: {
@@ -43,7 +43,7 @@ const MyItems = () => {
   };
 
   const handleDeleteBtn = (id) => {
-    const url = `http://localhost:5000/item/${id}`;
+    const url = `https://arcane-tundra-05128.herokuapp.com/item/${id}`;
     fetch(url, {
       method: "DELETE",
     })

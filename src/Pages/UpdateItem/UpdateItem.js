@@ -9,7 +9,7 @@ const UpdateItem = () => {
   const [stock, setStock] = useState(0);
 
   useEffect(() => {
-    const url = `http://localhost:5000/item/${itemId}`;
+    const url = `https://arcane-tundra-05128.herokuapp.com/item/${itemId}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
@@ -22,7 +22,7 @@ const UpdateItem = () => {
     const newStock = parseInt(item.stock) - 1;
 
     const data = { stock: newStock };
-    const url = `http://localhost:5000/item/${id}`;
+    const url = `https://arcane-tundra-05128.herokuapp.com/item/${id}`;
     fetch(url, {
       method: "PUT",
       headers: {
@@ -47,7 +47,7 @@ const UpdateItem = () => {
     const totalStock = currentStock + newStock;
 
     const data = { stock: totalStock };
-    const url = `http://localhost:5000/item/${itemId}`;
+    const url = `https://arcane-tundra-05128.herokuapp.com/item/${itemId}`;
     fetch(url, {
       method: "PUT",
       headers: {

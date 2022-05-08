@@ -15,7 +15,7 @@ const ManageItems = () => {
   };
 
   const handleDeleteBtn = (id) => {
-    const url = `http://localhost:5000/item/${id}`;
+    const url = `https://arcane-tundra-05128.herokuapp.com/item/${id}`;
     fetch(url, {
       method: "DELETE",
     })

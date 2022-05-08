@@ -42,7 +42,7 @@ const Login = () => {
   };
 
   const tokenGenerate = (email) => {
-    fetch("http://localhost:5000/login", {
+    fetch("https://arcane-tundra-05128.herokuapp.com/login", {
       method: "POST",
       headers: {
         "content-type": "application/json",

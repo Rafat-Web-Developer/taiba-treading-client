@@ -31,7 +31,7 @@ const AddItem = () => {
 
     // console.log(data);
 
-    fetch("http://localhost:5000/item", {
+    fetch("https://arcane-tundra-05128.herokuapp.com/item", {
       method: "POST",
       headers: {
         "content-type": "application/json",
