@@ -2,6 +2,7 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import Banner from "./Banner/Banner";
 import Items from "./Items/Items";
+import MostDecreasingItems from "./MostDecreasingItems/MostDecreasingItems";
 
 const Home = () => {
   return (
@@ -9,6 +10,7 @@ const Home = () => {
       <Container>
         <Banner></Banner>
         <Items></Items>
+        <MostDecreasingItems></MostDecreasingItems>
       </Container>
     </main>
   );
