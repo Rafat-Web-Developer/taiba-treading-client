@@ -14,6 +14,7 @@ import EmailVerification from "./Pages/EmailVerification/EmailVerification";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import UpdateItem from "./Pages/UpdateItem/UpdateItem";
+import Blog from "./Pages/Blog/Blog";
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
           path="/emailVerification"
           element={<EmailVerification></EmailVerification>}
         ></Route>
+        <Route path="/blog" element={<Blog></Blog>}></Route>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/signUp" element={<SignUp></SignUp>}></Route>
       </Routes>
