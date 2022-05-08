@@ -11,6 +11,7 @@ import {
   useSendPasswordResetEmail,
 } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
+import { async } from "@firebase/util";
 
 const Login = () => {
   const [showReset, setShowReset] = useState(false);
@@ -40,12 +41,28 @@ const Login = () => {
     signInWithGoogle();
   };
 
-  const handleLogin = (event) => {
+  const tokenGenerate = (email) => {
+    fetch("http://localhost:5000/login", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        localStorage.setItem("accessToken", data.accessToken);
+      });
+  };
+
+  const handleLogin = async (event) => {
     event.preventDefault();
 
     const email = event.target.email.value;
     const password = event.target.password.value;
-    signInWithEmailAndPassword(email, password);
+    await signInWithEmailAndPassword(email, password);
+
+    await tokenGenerate(email);
   };
 
   const handleShowResetPassword = () => {
