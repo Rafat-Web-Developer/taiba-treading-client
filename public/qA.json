@@ -1,17 +1,22 @@
 [
     {
         "id": 1,
-        "question": "Question",
-        "answer": "Answer"
+        "question": "Difference between javascript and nodejs.",
+        "answer": "JavaScript is a programming language that runs in any browser. Node js is a javascript library. Whereas Node JS is an interpreter or running environment for a JavaScript programming language that holds many excesses, it requires libraries that can easily be accessed from JavaScript programming for better use."
     },
     {
         "id": 2,
-        "question": "Question",
-        "answer": "Answer"
+        "question": "When should you use nodejs and when should you use mongodb?",
+        "answer": "When I went to load data from database then I use mongoDb. And when I went to connect mongoDB with my clint site then I need to create an API. For create API I use node js."
     },
     {
         "id": 3,
-        "question": "Question",
-        "answer": "Answer"
+        "question": "Differences between sql and nosql databases.",
+        "answer": "SQL databases are tabuler database. Where data are organize by table. NoSQL databases are document, key-value, graph, or wide-column stores. NoSQl database store data in object format so it's easy to excess data."
+    },
+    {
+        "id": 4,
+        "question": "What is the purpose of jwt and how does it work?",
+        "answer": "JWT or JSON Web Token is use to create token from server site. When we need protect our data we need to check user is valid or not. For this when valid user is logged in then I create a token from server site and send it into the clint site. When user send request api check token is valid or not."
     }
 ]
